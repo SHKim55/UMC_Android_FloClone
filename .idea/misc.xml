@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/BottomNaviTemplate/app/src/main/res/layout/activity_main.xml" value="0.13360507246376813" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/BottomNaviTemplate/app/src/main/res/layout/fragment_home.xml" value="0.13360507246376813" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/drawable/main_btm_color_selector.xml" value="0.24153846153846154" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/drawable/main_btm_look_selector.xml" value="0.2453125" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/drawable/round_button.xml" value="0.24153846153846154" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/drawable/round_chart_background.xml" value="0.2453125" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/drawable/round_select_button.xml" value="0.24153846153846154" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/activity_main.xml" value="0.11144883485309018" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/activity_song.xml" value="0.171875" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_album.xml" value="0.171875" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_home.xml" value="0.152" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_look.xml" value="0.176" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_search.xml" value="0.19202898550724637" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.176" />
+      </ProjectState>
+    </option>
+  </component>
+</project>
