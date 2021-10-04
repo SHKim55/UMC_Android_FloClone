@@ -29,98 +29,104 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/layout_look_menu"
+            <HorizontalScrollView
+                android:id="@+id/look_menu_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="70dp"
-                android:orientation="horizontal"
-                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_menu_look">
 
-                <Button
-                    android:id="@+id/btn_look_chart"
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="차트"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:background="@drawable/round_select_button" />
+                <LinearLayout
+                    android:id="@+id/layout_look_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_menu_look">
 
-                <Button
-                    android:id="@+id/btn_look_video"
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="영상"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:background="@drawable/round_select_button" />
+                    <Button
+                        android:id="@+id/btn_look_chart"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="15dp"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:text="차트"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:background="@drawable/round_select_button" />
 
-                <Button
-                    android:id="@+id/btn_look_genre"
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="장르"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:background="@drawable/round_select_button" />
+                    <Button
+                        android:id="@+id/btn_look_video"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="15dp"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:text="영상"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:background="@drawable/round_select_button" />
 
-                <Button
-                    android:id="@+id/btn_look_situation"
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="15dp"
-                    android:gravity="center"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="상황"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:background="@drawable/round_select_button" />
+                    <Button
+                        android:id="@+id/btn_look_genre"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="15dp"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:text="장르"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:background="@drawable/round_select_button" />
 
-                <Button
-                    android:id="@+id/btn_look_mood"
-                    android:layout_width="80dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="30dp"
-                    android:gravity="center"
-                    android:paddingStart="2dp"
-                    android:paddingEnd="2dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="분위기"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:background="@drawable/round_select_button" />
+                    <Button
+                        android:id="@+id/btn_look_situation"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="15dp"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:text="상황"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:background="@drawable/round_select_button" />
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/btn_look_mood"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="30dp"
+                        android:gravity="center"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:text="분위기"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:background="@drawable/round_select_button" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
 
             <TextView
                 android:id="@+id/text_chart"
@@ -133,7 +139,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_look_menu" />
+                app:layout_constraintTop_toBottomOf="@id/look_menu_list" />
 
             <ImageView
                 android:id="@+id/btm_arrow_more_chart_iv"

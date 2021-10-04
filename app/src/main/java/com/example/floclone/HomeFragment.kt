@@ -22,12 +22,9 @@ class HomeFragment : Fragment() {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment())
                 .commitAllowingStateLoss()
-
         }
 
 
         return binding.root
     }
-
-
 }

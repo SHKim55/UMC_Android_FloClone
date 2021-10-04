@@ -7,12 +7,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:overScrollMode="never" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="50dp">
+            android:paddingBottom="50dp" >
 
             <ImageView
                 android:id="@+id/img_background_iv"
@@ -234,7 +235,8 @@
                 android:id="@+id/song_recommended_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/text_music_today">
+                app:layout_constraintTop_toBottomOf="@id/text_music_today"
+                android:overScrollMode="never" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -358,7 +360,8 @@
                 android:id="@+id/potcast_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/text_potcast_today">
+                app:layout_constraintTop_toBottomOf="@id/text_potcast_today"
+                android:overScrollMode="never" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -473,7 +476,8 @@
                 android:id="@+id/video_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/text_video_collection" >
+                app:layout_constraintTop_toBottomOf="@id/text_video_collection"
+                android:overScrollMode="never" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
