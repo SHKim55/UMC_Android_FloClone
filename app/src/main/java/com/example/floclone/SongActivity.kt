@@ -17,8 +17,8 @@ class SongActivity : AppCompatActivity() {
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)    // root: xml 내 최상단 레이아웃
 
-        var toggle_random = 1
-        var toggle_repeat = 1
+        var toggle_random = 0
+        var toggle_repeat = 0
 
         if(intent.hasExtra("title") && intent.hasExtra("singer")) {
             binding.songMusicTitleTv.text = intent.getStringExtra("title")

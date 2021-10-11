@@ -5,15 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.floclone.databinding.FragmentBannerBinding
+import com.example.floclone.databinding.FragmentSavedSongBinding
+import com.example.floclone.databinding.FragmentSongBinding
 
-class BannerFragment(private val imgRes: Int) : Fragment() {
-    lateinit var binding :FragmentBannerBinding
+class SavedSongFragment : Fragment() {
+    lateinit var binding : FragmentSavedSongBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentBannerBinding.inflate(inflater, container, false)
+        binding = FragmentSavedSongBinding.inflate(inflater, container, false)
 
-        binding.bannerImageIv.setImageResource(imgRes)
+
         return binding.root
     }
+
 }
