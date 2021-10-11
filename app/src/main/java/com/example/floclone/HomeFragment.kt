@@ -37,6 +37,22 @@ class HomeFragment : Fragment() {
                 .commitAllowingStateLoss()
         }
 
+        // 홈 패널 구성
+        val panel1 = Panel("빌보드를 휩쓸어버린 그 노래", R.drawable.img_background_4_x_1, R.drawable.img_album_butter, R.drawable.img_album_dynamite,
+            "Butter", "Dynamite", "방탄소년단", "방탄소년단", "2021.09.10", 10)
+
+        val panel2 = Panel("과제할 때 듣는 신나는 노래", R.drawable.img_background_2, R.drawable.img_album_lilac, R.drawable.img_album_traffic_light,
+            "LILAC", "신호등", "아이유 (IU)", "이무진", "2021.11.12", 5)
+
+        val panelAdapter = HomePanelViewpagerAdapter(this)
+        panelAdapter.addFragment(HomePanelFragment(panel1))
+        panelAdapter.addFragment(HomePanelFragment(panel2))
+
+        binding.homePanelVp.adapter = panelAdapter
+        binding.homePanelVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+
+        // 광고 배너 패널 구성
         val bannerAdapter = BannerViewpagerAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
