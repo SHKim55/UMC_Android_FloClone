@@ -103,112 +103,25 @@
             android:background="@drawable/round_chart_background" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/album_tablayout"
+            android:id="@+id/album_content_tb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/album_back_iv"
             android:layout_marginTop="10dp"
             app:tabTextColor="@color/grey"
-            app:tabSelectedTextColor="@color/purple_700"
+            app:tabRippleColor="#00FF0000"
+            app:tabSelectedTextColor="@color/flo_blue"
             app:tabIndicatorFullWidth="false"
-            app:tabIndicatorColor="@color/purple_700">
+            app:tabIndicatorColor="@color/flo_blue" />
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="수록곡"
-                android:textAlignment="center" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="상세정보"
-                android:textAlignment="center" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="영상"
-                android:textAlignment="center" />
-        </com.google.android.material.tabs.TabLayout>
-
-        <!-- 세부 TabLayout 추후 적용
-        <FrameLayout
-            android:id="@+id/frame"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/album_content_vp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/album_tablayout"
-            app:layout_constraintTop_toBottomOf="@id/album_tablayout"
-            app:layout_constraintBottom_toBottomOf="parent" />
-         -->
-
-        <LinearLayout
-            android:id="@+id/mix_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/album_tablayout"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/favor_mix_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="10dp"
-                android:text="내 취향 MIX"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:textAlignment="center" />
-
-            <ImageView
-                android:id="@+id/toggle_favor_mix_iv"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/btn_toggle_off" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/btn_select_all_iv"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/album_content_tb"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btn_select_all_tv"
-            android:src="@drawable/btn_playlist_select_off" />
-
-        <TextView
-            android:id="@+id/btn_select_all_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/mix_layout"
-            app:layout_constraintLeft_toRightOf="@id/btn_select_all_iv"
-            android:text="전체선택"
-            android:textColor="@color/grey"
-            android:textAlignment="center" />
-
-        <ImageView
-            android:id="@+id/btn_listen_all_iv"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            app:layout_constraintRight_toLeftOf="@id/btn_listen_all_tv"
-            app:layout_constraintTop_toTopOf="@id/btn_select_all_tv"
-            android:src="@drawable/icon_browse_arrow_right" />
-
-        <TextView
-            android:id="@+id/btn_listen_all_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/btn_select_all_tv"
-            app:layout_constraintBottom_toBottomOf="@id/btn_select_all_tv"
-            app:layout_constraintRight_toRightOf="parent"
-            android:text="전체듣기"
-            android:textColor="@color/grey"
-            android:textAlignment="center" />
+            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
