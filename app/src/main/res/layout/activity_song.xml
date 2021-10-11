@@ -251,6 +251,6 @@
             app:layout_constraintBottom_toTopOf="@id/running_time_current_tv"
             android:max="50"
             android:progress="0"
-            android:thumbTint="@color/purple_700"/>
+            android:thumbTint="@color/purple_700" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

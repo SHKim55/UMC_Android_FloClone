@@ -35,7 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintTop_toBottomOf="@id/text_menu_look">
+                app:layout_constraintTop_toBottomOf="@id/text_menu_look"
+                android:scrollbarFadeDuration="@integer/material_motion_duration_short_2">
 
                 <LinearLayout
                     android:id="@+id/layout_look_menu"
@@ -45,8 +46,8 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_menu_look">
 
-                    <Button
-                        android:id="@+id/btn_look_chart"
+                    <TextView
+                        android:id="@+id/look_chart_tv"
                         android:layout_width="70dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -59,10 +60,10 @@
                         android:text="차트"
                         android:textColor="@color/white"
                         android:textSize="15sp"
-                        android:background="@drawable/round_select_button" />
+                        android:background="@drawable/round_menu_selector_on" />
 
-                    <Button
-                        android:id="@+id/btn_look_video"
+                    <TextView
+                        android:id="@+id/look_video_tv"
                         android:layout_width="70dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -73,12 +74,12 @@
                         android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         android:text="영상"
-                        android:textColor="@color/white"
+                        android:textColor="@color/grey"
                         android:textSize="15sp"
-                        android:background="@drawable/round_select_button" />
+                        android:background="@drawable/round_menu_selector_off" />
 
-                    <Button
-                        android:id="@+id/btn_look_genre"
+                    <TextView
+                        android:id="@+id/look_genre_tv"
                         android:layout_width="70dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -89,12 +90,12 @@
                         android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         android:text="장르"
-                        android:textColor="@color/white"
+                        android:textColor="@color/grey"
                         android:textSize="15sp"
-                        android:background="@drawable/round_select_button" />
+                        android:background="@drawable/round_menu_selector_off" />
 
-                    <Button
-                        android:id="@+id/btn_look_situation"
+                    <TextView
+                        android:id="@+id/look_situation_tv"
                         android:layout_width="70dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -105,12 +106,12 @@
                         android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         android:text="상황"
-                        android:textColor="@color/white"
+                        android:textColor="@color/grey"
                         android:textSize="15sp"
-                        android:background="@drawable/round_select_button" />
+                        android:background="@drawable/round_menu_selector_off" />
 
-                    <Button
-                        android:id="@+id/btn_look_mood"
+                    <TextView
+                        android:id="@+id/look_mood_tv"
                         android:layout_width="80dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center"
@@ -121,9 +122,9 @@
                         android:paddingTop="2dp"
                         android:paddingBottom="2dp"
                         android:text="분위기"
-                        android:textColor="@color/white"
+                        android:textColor="@color/grey"
                         android:textSize="15sp"
-                        android:background="@drawable/round_select_button" />
+                        android:background="@drawable/round_menu_selector_off" />
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -228,8 +229,367 @@
                     app:layout_constraintTop_toTopOf="@id/text_chart_play_all"
                     app:layout_constraintBottom_toBottomOf="@id/text_chart_play_all" />
 
+                <LinearLayout
+                    android:id="@+id/song_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/text_chart_description"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintTop_toTopOf="@id/song_layout"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/look_chart_album_1_iv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_album_lilac"
+                            android:scaleType="fitXY"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_number_1_tv"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/look_chart_album_1_iv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_title_1_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="라일락"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_1_tv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_singer_1_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="아이유 (IU)"
+                            android:textSize="15sp"
+                            android:textColor="@color/grey"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_1_tv"
+                            app:layout_constraintBottom_toBottomOf="@id/look_chart_number_1_tv" />
 
 
+                        <ImageView
+                            android:id="@+id/song_list_play_1_iv"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/btn_player_play"
+                            android:scaleType="fitXY"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintTop_toTopOf="@id/song_layout"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/look_chart_album_2_iv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_album_traffic_light"
+                            android:scaleType="fitXY"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_number_2_tv"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="2"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/look_chart_album_2_iv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_title_2_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="신호등"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_2_tv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_singer_2_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="이무진"
+                            android:textSize="15sp"
+                            android:textColor="@color/grey"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_2_tv"
+                            app:layout_constraintBottom_toBottomOf="@id/look_chart_number_2_tv" />
+
+
+                        <ImageView
+                            android:id="@+id/song_list_play_2_iv"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/btn_player_play"
+                            android:scaleType="fitXY"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintTop_toTopOf="@id/song_layout"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/look_chart_album_3_iv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_album_butter"
+                            android:scaleType="fitXY"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_number_3_tv"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="3"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/look_chart_album_3_iv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_title_3_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="Butter"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_3_tv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_singer_3_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="방탄소년단"
+                            android:textSize="15sp"
+                            android:textColor="@color/grey"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_3_tv"
+                            app:layout_constraintBottom_toBottomOf="@id/look_chart_number_3_tv" />
+
+
+                        <ImageView
+                            android:id="@+id/song_list_play_3_iv"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/btn_player_play"
+                            android:scaleType="fitXY"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintTop_toTopOf="@id/song_layout"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/look_chart_album_4_iv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/img_album_dynamite"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_number_4_tv"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="4"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/look_chart_album_4_iv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_title_4_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="Dynamite"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_4_tv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_singer_4_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="방탄소년단"
+                            android:textSize="15sp"
+                            android:textColor="@color/grey"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_4_tv"
+                            app:layout_constraintBottom_toBottomOf="@id/look_chart_number_4_tv" />
+
+
+                        <ImageView
+                            android:id="@+id/song_list_play_4_iv"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/btn_player_play"
+                            android:scaleType="fitXY"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintTop_toTopOf="@id/song_layout"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/look_chart_album_5_iv"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_album_lilac"
+                            android:scaleType="fitXY"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_number_5_tv"
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="5"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/look_chart_album_5_iv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_title_5_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="Coin"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_5_tv"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/look_chart_singer_5_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="20dp"
+                            android:gravity="start"
+                            android:text="아이유 (IU)"
+                            android:textSize="15sp"
+                            android:textColor="@color/grey"
+                            app:layout_constraintLeft_toRightOf="@+id/look_chart_number_5_tv"
+                            app:layout_constraintBottom_toBottomOf="@id/look_chart_number_5_tv" />
+
+
+                        <ImageView
+                            android:id="@+id/song_list_play_5_iv"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/btn_player_play"
+                            android:scaleType="fitXY"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintTop_toBottomOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
