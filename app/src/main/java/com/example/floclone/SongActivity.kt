@@ -64,15 +64,19 @@ class SongActivity : AppCompatActivity() {
     }
 
     private fun initSong() {
-        if(intent.hasExtra("title") && intent.hasExtra("singer") && intent.hasExtra("playTime") && intent.hasExtra("isPlaying")) {
+        if(intent.hasExtra("title") && intent.hasExtra("singer") && intent.hasExtra("lyrics") && intent.hasExtra("backgroundImageRes") && intent.hasExtra("playTime") && intent.hasExtra("isPlaying")) {
             song.title = intent.getStringExtra("title")!!
             song.singer = intent.getStringExtra("singer")!!
+            song.lyrics = intent.getStringExtra("lyrics")!!
+            song.backgroundImageRes = intent.getIntExtra("backgroundImageRes", 0)
             song.playTime = intent.getIntExtra("playTime", 0)
             song.isPlaying = intent.getBooleanExtra("isPlaying", false)
 
             binding.endTimeTv.text = String.format("%02d:%02d", song.playTime / 60, song.playTime % 60)
-            binding.songMusicTitleTv.text = intent.getStringExtra("title")
-            binding.songSingerNameTv.text = intent.getStringExtra("singer")
+            binding.songMusicTitleTv.text = song.title
+            binding.songSingerNameTv.text = song.singer
+            binding.songLyricsTv.text = song.lyrics
+            binding.songAlbumImage.setImageResource(song.backgroundImageRes)
             setPlayerStatus(song.isPlaying)
         }
     }
