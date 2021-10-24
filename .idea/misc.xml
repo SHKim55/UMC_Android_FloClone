@@ -19,19 +19,20 @@
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/drawable/shape_circle_grey.xml" value="0.106640625" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/activity_main.xml" value="0.11144883485309018" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/activity_song.xml" value="0.24653465346534653" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/activity_splash.xml" value="0.190234375" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_album.xml" value="0.2" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_album_songs.xml" value="0.190234375" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_banner.xml" value="0.1" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_detail.xml" value="0.1" />
-        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_home_panel.xml" value="0.2" />
-        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_locker.xml" value="0.1" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_locker.xml" value="0.16" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_look.xml" value="0.176" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_music_file.xml" value="0.1" />
-        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_saved_song.xml" value="0.1" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_saved_song.xml" value="0.176" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_search.xml" value="0.19202898550724637" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_song.xml" value="0.2" />
-        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_video.xml" value="0.1" />
+        <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/layout/fragment_video.xml" value="0.16" />
         <entry key="..\:/Users/5061k/AndroidStudioProjects/Flo_clone/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
       </map>
     </option>
