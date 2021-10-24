@@ -1,40 +1,48 @@
 package com.example.floclone
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.floclone.databinding.ActivityMainBinding
 import com.example.floclone.databinding.ActivitySongBinding
 
-// ':' - 상속, 코틀린에서는 상속 시 무조건 매개변수 () 사용
 class SongActivity : AppCompatActivity() {
 
     lateinit var binding : ActivitySongBinding
 
+    private lateinit var player : Player
     private var song : Song = Song()
+    private val handler = Handler(Looper.getMainLooper())
+
     var toggle_random = 0
     var toggle_repeat = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
-        setContentView(binding.root)    // root: xml 내 최상단 레이아웃
-
-
+        setContentView(binding.root)
 
         initSong()
+
+        player = Player(song.playTime, song.isPlaying)
+        player.start()
 
         binding.songDownIv.setOnClickListener {
             finish()
         }
 
         binding.btnPlayerPlay.setOnClickListener {
-            setPlayerStatus(false)
+            player.isPlaying = true
+            setPlayerStatus(true)
         }
 
         binding.btnPlayerPause.setOnClickListener {
-            setPlayerStatus(true)
+            player.isPlaying = false
+            setPlayerStatus(false)
         }
 
         binding.btnPlayerRepeat.setOnClickListener {
@@ -60,22 +68,22 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    fun initSong() {
+    private fun initSong() {
         if(intent.hasExtra("title") && intent.hasExtra("singer") && intent.hasExtra("playTime") && intent.hasExtra("isPlaying")) {
             song.title = intent.getStringExtra("title")!!
             song.singer = intent.getStringExtra("singer")!!
             song.playTime = intent.getIntExtra("playTime", 0)
             song.isPlaying = intent.getBooleanExtra("isPlaying", false)
 
+            binding.endTimeTv.text = String.format("%02d:%02d", song.playTime / 60, song.playTime % 60)
             binding.songMusicTitleTv.text = intent.getStringExtra("title")
-            binding.songSingerNameTv.text = intent.getStringExtra("singer")
             binding.songSingerNameTv.text = intent.getStringExtra("singer")
             setPlayerStatus(song.isPlaying)
         }
     }
 
-    fun setPlayerStatus(isPlaying : Boolean) {
-        if(isPlaying) {
+    private fun setPlayerStatus(isPlaying : Boolean) {
+        if(!isPlaying) {
             binding.btnPlayerPause.visibility = View.GONE
             binding.btnPlayerPlay.visibility = View.VISIBLE
         }
@@ -85,17 +93,48 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    fun setRepeat(isOn : Boolean) {
+    private fun setRepeat(isOn : Boolean) {
         if(isOn)
             binding.btnPlayerRepeat.setBackgroundResource(R.drawable.nugu_btn_repeat_inactive)
         else
             binding.btnPlayerRepeat.setBackgroundResource(R.drawable.btn_player_repeat_on_light)
     }
 
-    fun setRandomPlay(isOn : Boolean) {
+    private fun setRandomPlay(isOn : Boolean) {
         if(isOn)
             binding.btnPlayerRandom.setBackgroundResource(R.drawable.nugu_btn_random_inactive)
         else
             binding.btnPlayerRandom.setBackgroundResource(R.drawable.btn_playlist_random_on)
+    }
+
+    inner class Player(private val playTime : Int, var isPlaying: Boolean) : Thread() {
+        private var second = 0
+
+        override fun run() {
+            try {
+                while (true) {
+                    if (second >= playTime)
+                        break
+
+                    if (isPlaying) {
+                        sleep(1000)
+                        second++
+                        handler.post {
+                            binding.songPlayerSb.progress = second * 1000 / playTime
+                            binding.startTimeTv.text = String.format("%02d:%02d", second / 60, second % 60)
+                        }
+                    }
+
+                }
+            } catch (e : InterruptedException) {
+                Log.d("Interrupt", "Thread가 종료되었습니다.")
+            }
+
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        player.interrupt()
     }
 }

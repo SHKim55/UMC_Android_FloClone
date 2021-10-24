@@ -21,8 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         val song = Song("라일락", "아이유(IU)", 215, false)
 
-        Log.d("Log Test", song.title + song.singer)
-
         binding.mainPlayerLayout.setOnClickListener {
             val intent = Intent(this, SongActivity::class.java)
             intent.putExtra("title", song.title)

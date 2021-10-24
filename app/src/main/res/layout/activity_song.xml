@@ -244,6 +244,7 @@
             android:textAlignment="center" />
 
         <SeekBar
+            android:id="@+id/song_player_sb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
