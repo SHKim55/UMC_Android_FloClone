@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -164,13 +165,54 @@
             android:src="@drawable/btn_player_go_list" />
 
         <ImageView
+            android:id="@+id/btn_player_repeat_no"
+            android:layout_width="47dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/nugu_btn_repeat_inactive"
+            app:layout_constraintBottom_toTopOf="@id/btn_instagram_iv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:visibility="visible" />
+
+        <ImageView
             android:id="@+id/btn_player_repeat"
+            android:layout_width="47dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_playlist_repeat_on"
+            app:layout_constraintBottom_toTopOf="@id/btn_instagram_iv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/btn_player_repeat1"
+            android:layout_width="47dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_playlist_repeat_on1"
+            app:layout_constraintBottom_toTopOf="@id/btn_instagram_iv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/btn_player_repeat_list"
+            android:layout_width="47dp"
+            android:layout_height="45dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_playlist_repeat_playlist"
+            app:layout_constraintBottom_toTopOf="@id/btn_instagram_iv"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/btn_player_random_no"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginBottom="30dp"
-            app:layout_constraintBottom_toTopOf="@id/btn_instagram_iv"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:background="@drawable/btn_playlist_repeat_on" />
+            app:layout_constraintBottom_toTopOf="@id/btn_song_list_iv"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/nugu_btn_random_inactive"
+            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/btn_player_random"
@@ -179,7 +221,8 @@
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toTopOf="@id/btn_song_list_iv"
             app:layout_constraintRight_toRightOf="parent"
-            android:background="@drawable/btn_playlist_random_on" />
+            android:background="@drawable/btn_playlist_random_on"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/btn_player_play"
@@ -209,7 +252,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toTopOf="@id/btn_song_related_iv"
-            app:layout_constraintLeft_toRightOf="@id/btn_player_repeat"
+            app:layout_constraintLeft_toRightOf="@id/start_time_tv"
             android:src="@drawable/btn_miniplayer_previous" />
 
         <ImageView
@@ -219,38 +262,49 @@
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toTopOf="@id/btn_song_related_iv"
-            app:layout_constraintRight_toLeftOf="@id/btn_player_random"
+            app:layout_constraintRight_toLeftOf="@id/end_time_tv"
             android:src="@drawable/btn_miniplayer_next" />
 
         <TextView
-            android:id="@+id/running_time_current_tv"
+            android:id="@+id/start_time_tv"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/btn_player_repeat"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/song_player_sb"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="00:00"
             android:textColor="@color/purple_700"
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/running_time_whole_tv"
+            android:id="@+id/end_time_tv"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/btn_player_repeat"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/song_player_sb"
             app:layout_constraintRight_toRightOf="parent"
             android:text="01:00"
             android:textColor="@color/grey"
             android:textAlignment="center" />
 
         <SeekBar
+            android:id="@+id/song_player_sb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="105dp"
+            android:background="@null"
+            android:progressBackgroundTint="@color/song_player_bg"
+            android:progressTint="@color/song_player"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/running_time_current_tv"
-            android:max="50"
+            app:layout_constraintBottom_toTopOf="@id/btn_song_related_iv"
+            android:max="1000"
             android:progress="0"
+            android:thumb="@color/transparent"
             android:thumbTint="@color/purple_700" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

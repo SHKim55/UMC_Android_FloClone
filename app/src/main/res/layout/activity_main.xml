@@ -22,6 +22,7 @@
         android:background="#F9F9F9" >
 
         <LinearLayout
+            android:id="@+id/main_miniplayer_lo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -83,6 +84,25 @@
                 android:src="@drawable/btn_player_go_list"
                 android:layout_marginHorizontal="15dp" />
         </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/main_miniplayer_sb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@null"
+            android:progressBackgroundTint="@color/song_player_bg"
+            android:progressTint="@color/song_player"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/main_miniplayer_lo"
+            android:max="1000"
+            android:progress="0"
+            android:thumb="@color/transparent"
+            android:thumbTint="@color/purple_700" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

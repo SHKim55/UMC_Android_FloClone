@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.floclone.databinding.FragmentHomeBinding
@@ -23,18 +24,39 @@ class HomeFragment : Fragment() {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment())
                 .commitAllowingStateLoss()
+
+            (context as MainActivity).songIndex = 0
+            val index = (context as MainActivity).songIndex
+            (context as MainActivity).binding.mainMiniplayerTitleTv.text = (context as MainActivity).songs.get(index).title
+            (context as MainActivity).binding.mainMiniplayerSingerTv.text = (context as MainActivity).songs.get(index).singer
+            (context as MainActivity).binding.mainMiniplayerSb.progress = 0
+            (context as MainActivity).miniPlayer.second = 0
         }
 
         binding.imgAlbumEx2RecommendedIv.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment())
                 .commitAllowingStateLoss()
+
+            (context as MainActivity).songIndex = 1
+            val index = (context as MainActivity).songIndex
+            (context as MainActivity).binding.mainMiniplayerTitleTv.text = (context as MainActivity).songs.get(index).title
+            (context as MainActivity).binding.mainMiniplayerSingerTv.text = (context as MainActivity).songs.get(index).singer
+            (context as MainActivity).binding.mainMiniplayerSb.progress = 0
+            (context as MainActivity).miniPlayer.second = 0
         }
 
         binding.imgAlbumEx3RecommendedIv.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment())
                 .commitAllowingStateLoss()
+
+            (context as MainActivity).songIndex = 2
+            val index = (context as MainActivity).songIndex
+            (context as MainActivity).binding.mainMiniplayerTitleTv.text = (context as MainActivity).songs.get(index).title
+            (context as MainActivity).binding.mainMiniplayerSingerTv.text = (context as MainActivity).songs.get(index).singer
+            (context as MainActivity).binding.mainMiniplayerSb.progress = 0
+            (context as MainActivity).miniPlayer.second = 0
         }
 
         // 홈 패널 구성
