@@ -12,18 +12,18 @@ class SongActivity : AppCompatActivity() {
 
     lateinit var binding : ActivitySongBinding
 
+    private var song : Song = Song()
+    var toggle_random = 0
+    var toggle_repeat = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)    // root: xml 내 최상단 레이아웃
 
-        var toggle_random = 0
-        var toggle_repeat = 0
 
-        if(intent.hasExtra("title") && intent.hasExtra("singer")) {
-            binding.songMusicTitleTv.text = intent.getStringExtra("title")
-            binding.songSingerNameTv.text = intent.getStringExtra("singer")
-        }
+
+        initSong()
 
         binding.songDownIv.setOnClickListener {
             finish()
@@ -57,6 +57,20 @@ class SongActivity : AppCompatActivity() {
                 setRandomPlay(true)
                 toggle_random = 1
             }
+        }
+    }
+
+    fun initSong() {
+        if(intent.hasExtra("title") && intent.hasExtra("singer") && intent.hasExtra("playTime") && intent.hasExtra("isPlaying")) {
+            song.title = intent.getStringExtra("title")!!
+            song.singer = intent.getStringExtra("singer")!!
+            song.playTime = intent.getIntExtra("playTime", 0)
+            song.isPlaying = intent.getBooleanExtra("isPlaying", false)
+
+            binding.songMusicTitleTv.text = intent.getStringExtra("title")
+            binding.songSingerNameTv.text = intent.getStringExtra("singer")
+            binding.songSingerNameTv.text = intent.getStringExtra("singer")
+            setPlayerStatus(song.isPlaying)
         }
     }
 

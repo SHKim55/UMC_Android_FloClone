@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -165,12 +166,12 @@
 
         <ImageView
             android:id="@+id/btn_player_repeat"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="47dp"
+            android:layout_height="45dp"
             android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_playlist_repeat_on"
             app:layout_constraintBottom_toTopOf="@id/btn_instagram_iv"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:background="@drawable/btn_playlist_repeat_on" />
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <ImageView
             android:id="@+id/btn_player_random"
@@ -223,7 +224,7 @@
             android:src="@drawable/btn_miniplayer_next" />
 
         <TextView
-            android:id="@+id/running_time_current_tv"
+            android:id="@+id/start_time_tv"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/btn_player_repeat"
@@ -233,7 +234,7 @@
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/running_time_whole_tv"
+            android:id="@+id/end_time_tv"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/btn_player_repeat"
@@ -245,12 +246,20 @@
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:progressBackgroundTint="@color/song_player_bg"
+            android:progressTint="@color/song_player"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/running_time_current_tv"
-            android:max="50"
+            app:layout_constraintBottom_toTopOf="@id/start_time_tv"
+            android:max="1000"
             android:progress="0"
+            android:thumb="@color/transparent"
             android:thumbTint="@color/purple_700" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
