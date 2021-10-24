@@ -18,9 +18,6 @@ class SongActivity : AppCompatActivity() {
     private var song : Song = Song()
     private val handler = Handler(Looper.getMainLooper())
 
-    var toggle_random = 0
-    var toggle_repeat = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
@@ -45,26 +42,24 @@ class SongActivity : AppCompatActivity() {
             setPlayerStatus(false)
         }
 
+        binding.btnPlayerRepeatNo.setOnClickListener {
+            setRepeat(1)
+        }
         binding.btnPlayerRepeat.setOnClickListener {
-            if(toggle_repeat != 0) {
-                setRepeat(false)
-                toggle_repeat = 0
-            }
-            else {
-                setRepeat(true)
-                toggle_repeat = 1
-            }
+            setRepeat(2)
+        }
+        binding.btnPlayerRepeat1.setOnClickListener {
+            setRepeat(3)
+        }
+        binding.btnPlayerRepeatList.setOnClickListener {
+            setRepeat(0)
         }
 
+        binding.btnPlayerRandomNo.setOnClickListener {
+            setRandomPlay(true)
+        }
         binding.btnPlayerRandom.setOnClickListener {
-            if(toggle_random != 0) {
-                setRandomPlay(false)
-                toggle_random = 0
-            }
-            else {
-                setRandomPlay(true)
-                toggle_random = 1
-            }
+            setRandomPlay(false)
         }
     }
 
@@ -93,18 +88,56 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    private fun setRepeat(isOn : Boolean) {
-        if(isOn)
-            binding.btnPlayerRepeat.setBackgroundResource(R.drawable.nugu_btn_repeat_inactive)
-        else
-            binding.btnPlayerRepeat.setBackgroundResource(R.drawable.btn_player_repeat_on_light)
+    private fun setRepeat(repeatMode : Int) {
+        when(repeatMode) {
+            0 -> {  // no repeat
+                binding.btnPlayerRepeatNo.visibility = View.VISIBLE
+                binding.btnPlayerRepeat.visibility = View.GONE
+                binding.btnPlayerRepeat1.visibility = View.GONE
+                binding.btnPlayerRepeatList.visibility = View.GONE
+
+                player.isPlaying = false
+            }
+
+            1 -> {  // repeat all
+                binding.btnPlayerRepeatNo.visibility = View.GONE
+                binding.btnPlayerRepeat.visibility = View.VISIBLE
+                binding.btnPlayerRepeat1.visibility = View.GONE
+                binding.btnPlayerRepeatList.visibility = View.GONE
+
+                player.isPlaying = false
+            }
+
+            2 -> {  // repeat one song
+                binding.btnPlayerRepeatNo.visibility = View.GONE
+                binding.btnPlayerRepeat.visibility = View.GONE
+                binding.btnPlayerRepeat1.visibility = View.VISIBLE
+                binding.btnPlayerRepeatList.visibility = View.GONE
+
+                player = Player(song.playTime, true)
+                player.start()
+            }
+
+            3 -> {  // repeat songs in playlist
+                binding.btnPlayerRepeat.visibility = View.GONE
+                binding.btnPlayerRepeat.visibility = View.GONE
+                binding.btnPlayerRepeat1.visibility = View.GONE
+                binding.btnPlayerRepeatList.visibility = View.VISIBLE
+
+                player.isPlaying = false
+            }
+        }
     }
 
-    private fun setRandomPlay(isOn : Boolean) {
-        if(isOn)
-            binding.btnPlayerRandom.setBackgroundResource(R.drawable.nugu_btn_random_inactive)
-        else
-            binding.btnPlayerRandom.setBackgroundResource(R.drawable.btn_playlist_random_on)
+    private fun setRandomPlay(isRandom : Boolean) {
+        if(isRandom) {
+            binding.btnPlayerRandomNo.visibility = View.GONE
+            binding.btnPlayerRandom.visibility = View.VISIBLE
+        }
+        else {
+            binding.btnPlayerRandomNo.visibility = View.VISIBLE
+            binding.btnPlayerRandom.visibility = View.GONE
+        }
     }
 
     inner class Player(private val playTime : Int, var isPlaying: Boolean) : Thread() {
