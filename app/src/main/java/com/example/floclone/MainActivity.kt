@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         songs.add(Song("LILAC", "아이유(IU)", "내리는 꽃가루에\n눈이 따끔해", R.drawable.img_album_lilac, 235, false))
         songs.add(Song("달", "AKMU(악동뮤지션)", "유난히 밝은 달\n거대한 원형 속에 보이네 너의 미소", R.drawable.img_album_sailing, 242, false))
         songs.add(Song("신호등", "이무진", "이제야 목적지를 정했지만\n가려한 날 막아서네 난 갈 길이 먼데", R.drawable.img_album_traffic_light, 232, false))
+        songs.add(Song("strawberry moon", "아이유(IU)", "달이 익어가니 서둘러 젊은 피야\n민들레 한 송이 들고", R.drawable.img_album_strawberry, 205, false))
 
         // 미니플레이어 설정
         binding.mainMiniplayerTitleTv.text = songs.get(songIndex).title
