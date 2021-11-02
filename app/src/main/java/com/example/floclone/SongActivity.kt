@@ -1,5 +1,6 @@
 package com.example.floclone
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +10,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.floclone.databinding.ActivityMainBinding
 import com.example.floclone.databinding.ActivitySongBinding
+import com.google.gson.Gson
 
 class SongActivity : AppCompatActivity() {
 
@@ -17,6 +19,8 @@ class SongActivity : AppCompatActivity() {
     private lateinit var player : Player
     private var song : Song = Song()
     private val handler = Handler(Looper.getMainLooper())
+    private var mediaPlayer : MediaPlayer? = null    // ?: nullable object
+    private var gson : Gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,59 +29,58 @@ class SongActivity : AppCompatActivity() {
 
         initSong()
 
-        player = Player(song.playTime, song.isPlaying)
-        player.start()
-
         binding.songDownIv.setOnClickListener {
             finish()
         }
 
         binding.btnPlayerPlay.setOnClickListener {
             player.isPlaying = true
+            song.isPlaying = true
             setPlayerStatus(true)
+            mediaPlayer?.start()
+            mediaPlayer?.seekTo(song.playPos)
         }
 
-        binding.btnPlayerPause.setOnClickListener {
-            player.isPlaying = false
-            setPlayerStatus(false)
-        }
+        binding.btnPlayerPause.setOnClickListener { onPause() }
 
-        binding.btnPlayerRepeatNo.setOnClickListener {
-            setRepeat(1)
-        }
-        binding.btnPlayerRepeat.setOnClickListener {
-            setRepeat(2)
-        }
-        binding.btnPlayerRepeat1.setOnClickListener {
-            setRepeat(3)
-        }
-        binding.btnPlayerRepeatList.setOnClickListener {
-            setRepeat(0)
-        }
+        binding.btnPlayerRepeatNo.setOnClickListener { setRepeat(1) }
+        binding.btnPlayerRepeat.setOnClickListener { setRepeat(2) }
+        binding.btnPlayerRepeat1.setOnClickListener { setRepeat(3) }
+        binding.btnPlayerRepeatList.setOnClickListener { setRepeat(0) }
 
-        binding.btnPlayerRandomNo.setOnClickListener {
-            setRandomPlay(true)
-        }
-        binding.btnPlayerRandom.setOnClickListener {
-            setRandomPlay(false)
-        }
+        binding.btnPlayerRandomNo.setOnClickListener { setRandomPlay(true) }
+        binding.btnPlayerRandom.setOnClickListener { setRandomPlay(false) }
     }
 
     private fun initSong() {
-        if(intent.hasExtra("title") && intent.hasExtra("singer") && intent.hasExtra("lyrics") && intent.hasExtra("backgroundImageRes") && intent.hasExtra("playTime") && intent.hasExtra("isPlaying")) {
+        if(intent.hasExtra("title") && intent.hasExtra("singer") && intent.hasExtra("lyrics") && intent.hasExtra("backgroundImageRes") && intent.hasExtra("playTime") && intent.hasExtra("isPlaying") && intent.hasExtra("second") && intent.hasExtra("music") && intent.hasExtra("playPos")) {
+
             song.title = intent.getStringExtra("title")!!
             song.singer = intent.getStringExtra("singer")!!
             song.lyrics = intent.getStringExtra("lyrics")!!
+            song.music = intent.getStringExtra("music")!!
             song.backgroundImageRes = intent.getIntExtra("backgroundImageRes", 0)
             song.playTime = intent.getIntExtra("playTime", 0)
             song.isPlaying = intent.getBooleanExtra("isPlaying", false)
+            song.second = intent.getIntExtra("second", 0)
+            song.playPos = intent.getIntExtra("playPos", 0)
+
+            val musicFile = resources.getIdentifier(song.music, "raw", this.packageName)
 
             binding.endTimeTv.text = String.format("%02d:%02d", song.playTime / 60, song.playTime % 60)
             binding.songMusicTitleTv.text = song.title
             binding.songSingerNameTv.text = song.singer
             binding.songLyricsTv.text = song.lyrics
             binding.songAlbumImage.setImageResource(song.backgroundImageRes)
+            binding.songPlayerSb.progress = song.second * 1000 / song.playTime
+            binding.startTimeTv.text = String.format("%02d:%02d", song.second / 60, song.second % 60)
+
             setPlayerStatus(song.isPlaying)
+
+            mediaPlayer = MediaPlayer.create(this, musicFile)
+
+            player = Player(song.playTime, song.isPlaying, song.second)
+            player.start()
         }
     }
 
@@ -118,7 +121,7 @@ class SongActivity : AppCompatActivity() {
                 binding.btnPlayerRepeat1.visibility = View.VISIBLE
                 binding.btnPlayerRepeatList.visibility = View.GONE
 
-                player = Player(song.playTime, true)
+                player = Player(song.playTime, true, song.second)
                 player.start()
             }
 
@@ -144,8 +147,8 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    inner class Player(private val playTime : Int, var isPlaying: Boolean) : Thread() {
-        private var second = 0
+    inner class Player(private val playTime : Int, var isPlaying: Boolean, private val savedSecond : Int) : Thread() {
+        private var second = savedSecond
 
         override fun run() {
             try {
@@ -170,8 +173,27 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer?.pause()   // 미디어플레이어 중지
+        player.isPlaying = false // Thread 중지
+        song.second = (binding.songPlayerSb.progress * song.playTime) / 1000
+        song.playPos = mediaPlayer?.currentPosition!!
+        setPlayerStatus(false)   // 정지 상태일때의 이미지로 전환
+
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()   // sharedPreference 조작
+        //GSON : JSON 생성기
+        val json = gson.toJson(song)
+        editor.putString("song", json)
+
+        editor.apply()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         player.interrupt()
+        mediaPlayer?.release()   // 미디어 플레이어가 갖고 있던 리소스 해제 (song)
+        mediaPlayer = null       // 미디어 플레이어 해제
     }
 }

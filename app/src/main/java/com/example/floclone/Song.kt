@@ -7,4 +7,7 @@ data class Song(
     var backgroundImageRes : Int = 0,
     var playTime : Int = 0,
     var isPlaying : Boolean = false,
+    var second : Int = 0,
+    var music : String = "",
+    var playPos : Int = 0,
 )

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.floclone.databinding.FragmentHomeBinding
@@ -23,73 +22,53 @@ class HomeFragment : Fragment() {
         binding.imgAlbumEx1RecommendedIv.setOnClickListener {
             (context as MainActivity).songIndex = 0
             val index = (context as MainActivity).songIndex
-            val tempTitle = (context as MainActivity).songs.get(index).title
-            val tempSinger = (context as MainActivity).songs.get(index).singer
-            val tempAlbumCoverRes = (context as MainActivity).songs.get(index).backgroundImageRes
-            val album = Album("IU 5th Album 'LILAC'", tempSinger, "2021.03.25", "가요/댄스", tempAlbumCoverRes, 0)
+            val nextSong : Song = (context as MainActivity).songs.get(index)
+            val album = Album("IU 5th Album 'LILAC'", nextSong.singer, "2021.03.25", "가요/댄스", nextSong.backgroundImageRes, 0)
+
+            changePlayer(nextSong)
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment(album))
                 .commitAllowingStateLoss()
-
-            (context as MainActivity).binding.mainMiniplayerTitleTv.text = tempTitle
-            (context as MainActivity).binding.mainMiniplayerSingerTv.text = tempSinger
-            (context as MainActivity).binding.mainMiniplayerSb.progress = 0
-            (context as MainActivity).miniPlayer.second = 0
         }
 
         binding.imgAlbumEx2RecommendedIv.setOnClickListener {
             (context as MainActivity).songIndex = 1
             val index = (context as MainActivity).songIndex
-            val tempTitle = (context as MainActivity).songs.get(index).title
-            val tempSinger = (context as MainActivity).songs.get(index).singer
-            val tempAlbumCoverRes = (context as MainActivity).songs.get(index).backgroundImageRes
-            val album = Album("항해", tempSinger, "2019.09.25", "가요/락", tempAlbumCoverRes, 0)
+            val nextSong : Song = (context as MainActivity).songs.get(index)
+            val album = Album("항해", nextSong.singer, "2019.09.25", "가요/락", nextSong.backgroundImageRes, 0)
+
+            changePlayer(nextSong)
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment(album))
                 .commitAllowingStateLoss()
-
-            (context as MainActivity).binding.mainMiniplayerTitleTv.text = tempTitle
-            (context as MainActivity).binding.mainMiniplayerSingerTv.text = tempSinger
-            (context as MainActivity).binding.mainMiniplayerSb.progress = 0
-            (context as MainActivity).miniPlayer.second = 0
         }
 
         binding.imgAlbumEx3RecommendedIv.setOnClickListener {
             (context as MainActivity).songIndex = 2
             val index = (context as MainActivity).songIndex
-            val tempTitle = (context as MainActivity).songs.get(index).title
-            val tempSinger = (context as MainActivity).songs.get(index).singer
-            val tempAlbumCoverRes = (context as MainActivity).songs.get(index).backgroundImageRes
-            val album = Album("신호등", tempSinger, "2021.05.14", "가요/락", tempAlbumCoverRes, 2)
+            val nextSong : Song = (context as MainActivity).songs.get(index)
+            val album = Album(nextSong.title, nextSong.singer, "2021.05.14", "가요/락", nextSong.backgroundImageRes, 2)
+
+            changePlayer(nextSong)
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment(album))
                 .commitAllowingStateLoss()
-
-            (context as MainActivity).binding.mainMiniplayerTitleTv.text = tempTitle
-            (context as MainActivity).binding.mainMiniplayerSingerTv.text = tempSinger
-            (context as MainActivity).binding.mainMiniplayerSb.progress = 0
-            (context as MainActivity).miniPlayer.second = 0
         }
 
         binding.imgAlbumEx4RecommendedIv.setOnClickListener {
             (context as MainActivity).songIndex = 3
             val index = (context as MainActivity).songIndex
-            val tempTitle = (context as MainActivity).songs.get(index).title
-            val tempSinger = (context as MainActivity).songs.get(index).singer
-            val tempAlbumCoverRes = (context as MainActivity).songs.get(index).backgroundImageRes
-            val album = Album("신호등", tempSinger, "2021.05.14", "가요/락", tempAlbumCoverRes, 2)
+            val nextSong : Song = (context as MainActivity).songs.get(index)
+            val album = Album(nextSong.title, nextSong.singer, "2021.10.19", "가요/락", nextSong.backgroundImageRes, 2)
+
+            changePlayer(nextSong)
 
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.main_frm, AlbumFragment(album))
                 .commitAllowingStateLoss()
-
-            (context as MainActivity).binding.mainMiniplayerTitleTv.text = tempTitle
-            (context as MainActivity).binding.mainMiniplayerSingerTv.text = tempSinger
-            (context as MainActivity).binding.mainMiniplayerSb.progress = 0
-            (context as MainActivity).miniPlayer.second = 0
         }
 
         // 홈 패널 구성
@@ -116,5 +95,10 @@ class HomeFragment : Fragment() {
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         return binding.root
+    }
+
+    private fun changePlayer(song : Song) {
+        (context as MainActivity).song = song
+        (context as MainActivity).setMiniPlayer(song)
     }
 }
