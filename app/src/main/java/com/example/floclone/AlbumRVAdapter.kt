@@ -7,16 +7,16 @@ import com.example.floclone.databinding.ItemAlbumBinding
 
 class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>() {
     //클릭 인터페이스 정의
-    interface MyItemClickListener {
+    interface AlbumItemClickListener {
         fun onItemClick(album : Album)
         fun onPlayButtonClick(album : Album, index : Int)
     }
 
     // 리스너 객체 저장 변수
-    private lateinit var myItemClickListener: MyItemClickListener
+    private lateinit var albumItemClickListener: AlbumItemClickListener
 
-    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
-        myItemClickListener = itemClickListener
+    fun setAlbumItemClickListener(itemClickListener: AlbumItemClickListener) {
+        albumItemClickListener = itemClickListener
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): AlbumRVAdapter.ViewHolder {
@@ -27,8 +27,8 @@ class AlbumRVAdapter(private val albumList: ArrayList<Album>) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: AlbumRVAdapter.ViewHolder, position: Int) {
         holder.bind(albumList[position])
-        holder.itemView.setOnClickListener() { myItemClickListener.onItemClick(albumList[position]) }
-        holder.binding.albumImgPlayIv.setOnClickListener() { myItemClickListener.onPlayButtonClick(albumList[position], position) }
+        holder.itemView.setOnClickListener() { albumItemClickListener.onItemClick(albumList[position]) }
+        holder.binding.albumImgPlayIv.setOnClickListener() { albumItemClickListener.onPlayButtonClick(albumList[position], position) }
     }
 
     override fun getItemCount(): Int = albumList.size

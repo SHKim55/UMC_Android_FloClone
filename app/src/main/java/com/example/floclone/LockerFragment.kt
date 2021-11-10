@@ -10,10 +10,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class LockerFragment : Fragment() {
-
     lateinit var binding: FragmentLockerBinding
     val information = arrayListOf("저장한 곡", "음악파일")
-
+    val songs = ArrayList<Song>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,7 +21,9 @@ class LockerFragment : Fragment() {
     ): View {
         binding = FragmentLockerBinding.inflate(inflater, container, false)
 
-        val lockerAdapter = LockerViewpagerAdapter(this)
+        createSavedSongList()
+
+        val lockerAdapter = LockerViewpagerAdapter(this, songs)
         binding.lockerContentVp.adapter = lockerAdapter
 
         TabLayoutMediator(binding.lockerContentTb, binding.lockerContentVp) {
@@ -33,4 +34,12 @@ class LockerFragment : Fragment() {
         return binding.root
     }
 
+    private fun createSavedSongList() {
+        val songData = (context as MainActivity).albums
+
+        for(i in 0 until songData.size) {
+            for(j in 0 until songData[i].songs.size)
+                songs.add(songData[i].songs.get(j))
+        }
+    }
 }

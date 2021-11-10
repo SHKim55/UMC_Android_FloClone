@@ -1,7 +1,6 @@
 package com.example.floclone
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +36,7 @@ class HomeFragment : Fragment() {
         //Adapter - RV 연결
         binding.homeTodayMusicAlbumRecyclerview.adapter = albumRVAdapter
 
-        albumRVAdapter.setMyItemClickListener(object: AlbumRVAdapter.MyItemClickListener {
+        albumRVAdapter.setAlbumItemClickListener(object: AlbumRVAdapter.AlbumItemClickListener {
             override fun onItemClick(album: Album) {
                 changeAlbumFragment(album)
             }

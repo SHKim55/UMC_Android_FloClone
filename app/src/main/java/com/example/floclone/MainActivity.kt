@@ -114,32 +114,32 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadMusicData() {
         val songs1 = ArrayList<Song>()
-        songs1.add(Song("라일락", "아이유(IU)", "내리는 꽃가루에\n눈이 따끔해", R.drawable.img_album_lilac, 235, "lilac_iu", 1, false, 0, 0))
+        songs1.add(Song("라일락", "아이유(IU)", "내리는 꽃가루에\n눈이 따끔해", R.drawable.img_album_lilac, 235, "lilac_iu", 1, false, 0, 0, true))
         songs1.add(Song("Flu", "아이유(IU)", "Doc, I'm feeling bad\n미열이 흐르고 또 어질어질해", R.drawable.img_album_lilac, 188, "flu_iu", 2, false, 0, 0))
-        songs1.add(Song("Coin", "아이유(IU)", "강자에게 더 세게 I love gamble\n과감할수록 신세계 on my table", R.drawable.img_album_lilac, 193, "coin_iu", 3, false, 0, 0))
+        songs1.add(Song("Coin", "아이유(IU)", "강자에게 더 세게 I love gamble\n과감할수록 신세계 on my table", R.drawable.img_album_lilac, 193, "coin_iu", 3, false, 0, 0, true))
         val album1 = Album("IU 5th Album 'LILAC'", "아이유(IU)", "2021.03.25", "가요 / 댄스", R.drawable.img_album_lilac, 0, songs1)
 
         val songs2 = ArrayList<Song>()
         songs2.add(Song("뱃노래", "AKMU(악뮤)", "귓가에 넘치는 바다\n눈을 감고 느낀다",  R.drawable.img_album_sailing, 138, "chantey_akmu", 1, false, 0, 0))
         songs2.add(Song("물 만난 물고기", "AKMU(악뮤)", "한바탕 휩쓸고 간 폭풍의 잔해 속에\n언제 그랬냐는 듯 잔잔한 파도",  R.drawable.img_album_sailing, 246, "fish_with_water_akmu", 2, false, 0, 0))
-        songs2.add(Song("어떻게 이별까지 사랑하겠어, 널 사랑하는 거지", "AKMU(악뮤)", "일부러 몇 발자국 물러나\n내가 없이 혼자 걷는 널 바라본다",  R.drawable.img_album_sailing, 216, "how_come_I_love_you_akmu", 3, false, 0, 0))
-        songs2.add(Song("달", "AKMU(악동뮤지션)", "유난히 밝은 달\n거대한 원형 속에 보이네 너의 미소", R.drawable.img_album_sailing, 242, "moon_akmu", 4, false, 0, 0))
+        songs2.add(Song("어떻게 이별까지 사랑하겠어, 널 사랑하는 거지", "AKMU(악뮤)", "일부러 몇 발자국 물러나\n내가 없이 혼자 걷는 널 바라본다",  R.drawable.img_album_sailing, 216, "how_come_I_love_you_akmu", 3, false, 0, 0, true))
+        songs2.add(Song("달", "AKMU(악뮤)", "유난히 밝은 달\n거대한 원형 속에 보이네 너의 미소", R.drawable.img_album_sailing, 242, "moon_akmu", 4, false, 0, 0))
         val album2 = Album("항해", "AKMU(악뮤)", "2019.09.25", "가요 / 락", R.drawable.img_album_sailing, 0, songs2)
 
         val songs3 = ArrayList<Song>()
-        songs3.add(Song("Dynamite", "방탄소년단", "Cos ah ah I'm in the stars tonight\nSo watch me bring the fire",  R.drawable.img_album_dynamite, 199, "dynamite_bts", 1, false, 0, 0))
+        songs3.add(Song("Dynamite", "방탄소년단", "Cos ah ah I'm in the stars tonight\nSo watch me bring the fire",  R.drawable.img_album_dynamite, 199, "dynamite_bts", 1, false, 0, 0, true))
         val album3 = Album("DYNAMITE (DayTime Ver.)", "방탄소년단", "2020.08.21", "가요 / 댄스", R.drawable.img_album_dynamite, 2, songs3)
 
         val songs4 = ArrayList<Song>()
-        songs4.add(Song("Butter", "방탄소년단", "Smooth like butter\nLike a criminal undercover",  R.drawable.img_album_butter, 144, "butter_bts", 1, false, 0, 0))
+        songs4.add(Song("Butter", "방탄소년단", "Smooth like butter\nLike a criminal undercover",  R.drawable.img_album_butter, 144, "butter_bts", 1, false, 0, 0, true))
         val album4 = Album("Butter", "방탄소년단", "2021.05.21", "가요 / 댄스", R.drawable.img_album_butter, 2, songs4)
 
         val songs5 = ArrayList<Song>()
-        songs5.add(Song("strawberry moon", "아이유(IU)", "달이 익어가니 서둘러 젊은 피야\n민들레 한 송이 들고", R.drawable.img_album_strawberry, 205, "strawberry_moon_iu", 1, false, 0, 0))
+        songs5.add(Song("strawberry moon", "아이유(IU)", "달이 익어가니 서둘러 젊은 피야\n민들레 한 송이 들고", R.drawable.img_album_strawberry, 205, "strawberry_moon_iu", 1, false, 0, 0, true))
         val album5 = Album("strawberry moon", "아이유(IU)", "2021.10.19", "가요 / 락", R.drawable.img_album_strawberry, 2, songs5)
 
         val songs6 = ArrayList<Song>()
-        songs6.add(Song("신호등", "이무진", "이제야 목적지를 정했지만\n가려한 날 막아서네 난 갈 길이 먼데", R.drawable.img_album_traffic_light, 232, "traffic_light_lee_mujin", 0, false, 0, 0))
+        songs6.add(Song("신호등", "이무진", "이제야 목적지를 정했지만\n가려한 날 막아서네 난 갈 길이 먼데", R.drawable.img_album_traffic_light, 232, "traffic_light_lee_mujin", 0, false, 0, 0, true))
         val album6 = Album("신호등", "이무진", "2021.05.14", "가요 / 락", R.drawable.img_album_traffic_light, 2, songs6)
 
         albums.add(album1)

@@ -11,4 +11,5 @@ data class Song(
     var isPlaying : Boolean = false,
     var second : Int = 0,
     var playPos : Int = 0,
+    val isTitle : Boolean = false,
 )

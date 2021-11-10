@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.floclone.databinding.FragmentSongBinding
+import com.google.gson.Gson
 
-class SongFragment : Fragment() {
+class SongFragment(private var track : ArrayList<Song>) : Fragment() {
     lateinit var binding : FragmentSongBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,22 +29,18 @@ class SongFragment : Fragment() {
             }
         }
 
-        binding.songListTitle1Tv.setOnClickListener {
-            makeToastMessage(binding.songListTitle1Tv.text)
-        }
-        binding.songListTitle2Tv.setOnClickListener {
-            makeToastMessage(binding.songListTitle2Tv.text)
+        //더미데이터와 Adapter 연결
+        val songRVAdapter = SongRVAdapter(track)
+        //Adapter - RV 연결
+        binding.songAlbumTrackRecyclerview.adapter = songRVAdapter
 
-        }
-        binding.songListTitle3Tv.setOnClickListener {
-            makeToastMessage(binding.songListTitle3Tv.text)
-        }
-        binding.songListTitle4Tv.setOnClickListener {
-            makeToastMessage(binding.songListTitle4Tv.text)
-        }
-        binding.songListTitle5Tv.setOnClickListener {
-            makeToastMessage(binding.songListTitle5Tv.text)
-        }
+        songRVAdapter.setMyItemClickListener(object: SongRVAdapter.SongItemClickListener {
+            override fun onItemClick(song : Song) { makeToastMessage(song.title) }
+            override fun onMoreButtonClick(index : Int) { songRVAdapter.removeItem(index) }
+        })
+
+        //레이아웃 매니저 추가
+        binding.songAlbumTrackRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         return binding.root
     }
@@ -50,6 +48,7 @@ class SongFragment : Fragment() {
     fun makeToastMessage(text : CharSequence) {
         Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
     }
+
     fun setToggle(isOn : Boolean) {
         if(isOn)
             binding.toggleFavorMixIv.setBackgroundResource(R.drawable.btn_toggle_off)
