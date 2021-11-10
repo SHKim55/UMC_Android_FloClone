@@ -1,16 +1,21 @@
 package com.example.floclone
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.floclone.databinding.FragmentHomeBinding
+import com.google.gson.Gson
 
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
+    private lateinit var albumDB : ArrayList<Album>
+    private var albumData =  ArrayList<Album>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,57 +24,34 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        binding.imgAlbumEx1RecommendedIv.setOnClickListener {
-            (context as MainActivity).songIndex = 0
-            val index = (context as MainActivity).songIndex
-            val nextSong : Song = (context as MainActivity).songs.get(index)
-            val album = Album("IU 5th Album 'LILAC'", nextSong.singer, "2021.03.25", "가요/댄스", nextSong.backgroundImageRes, 0)
-
-            changePlayer(nextSong)
-
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, AlbumFragment(album))
-                .commitAllowingStateLoss()
+        albumDB = (context as MainActivity).albums
+        //데이터 리스트 생성
+        albumData.apply {
+            for(i in 0 until albumDB.size) {
+                add(albumDB[i])
+            }
         }
 
-        binding.imgAlbumEx2RecommendedIv.setOnClickListener {
-            (context as MainActivity).songIndex = 1
-            val index = (context as MainActivity).songIndex
-            val nextSong : Song = (context as MainActivity).songs.get(index)
-            val album = Album("항해", nextSong.singer, "2019.09.25", "가요/락", nextSong.backgroundImageRes, 0)
+        //더미데이터와 Adapter 연결
+        val albumRVAdapter = AlbumRVAdapter(albumData)
+        //Adapter - RV 연결
+        binding.homeTodayMusicAlbumRecyclerview.adapter = albumRVAdapter
 
-            changePlayer(nextSong)
+        albumRVAdapter.setMyItemClickListener(object: AlbumRVAdapter.MyItemClickListener {
+            override fun onItemClick(album: Album) {
+                changeAlbumFragment(album)
+            }
 
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, AlbumFragment(album))
-                .commitAllowingStateLoss()
-        }
+            override fun onPlayButtonClick(album : Album, index : Int) {
+                val nextSong = album.songs.get(0)
+                (context as MainActivity).albumIndex = index
+                (context as MainActivity).songIndex = 0
+                changePlayer(nextSong)
+            }
+        })
 
-        binding.imgAlbumEx3RecommendedIv.setOnClickListener {
-            (context as MainActivity).songIndex = 2
-            val index = (context as MainActivity).songIndex
-            val nextSong : Song = (context as MainActivity).songs.get(index)
-            val album = Album(nextSong.title, nextSong.singer, "2021.05.14", "가요/락", nextSong.backgroundImageRes, 2)
-
-            changePlayer(nextSong)
-
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, AlbumFragment(album))
-                .commitAllowingStateLoss()
-        }
-
-        binding.imgAlbumEx4RecommendedIv.setOnClickListener {
-            (context as MainActivity).songIndex = 3
-            val index = (context as MainActivity).songIndex
-            val nextSong : Song = (context as MainActivity).songs.get(index)
-            val album = Album(nextSong.title, nextSong.singer, "2021.10.19", "가요/락", nextSong.backgroundImageRes, 2)
-
-            changePlayer(nextSong)
-
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, AlbumFragment(album))
-                .commitAllowingStateLoss()
-        }
+        //레이아웃 매니저 추가
+        binding.homeTodayMusicAlbumRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         // 홈 패널 구성
         val panel1 = Panel("빌보드를 휩쓸어버린 그 노래", R.drawable.img_background_4_x_1, R.drawable.img_album_butter, R.drawable.img_album_dynamite,
@@ -95,6 +77,18 @@ class HomeFragment : Fragment() {
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         return binding.root
+    }
+
+    private fun changeAlbumFragment(album : Album) {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, AlbumFragment().apply {
+                arguments = Bundle().apply {
+                    val gson = Gson()
+                    val albumJson = gson.toJson(album)
+                    putString("album", albumJson)
+                }
+            })
+            .commitAllowingStateLoss()
     }
 
     private fun changePlayer(song : Song) {
