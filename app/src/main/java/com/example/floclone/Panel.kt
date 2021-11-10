@@ -10,5 +10,5 @@ data class Panel (
     val albumSinger1 : String = " ",
     val albumSinger2 : String = " ",
     val updateDate : String = " ",
-    val numOfMusic : Int = 0
+    val songNum : Int = 0
 )

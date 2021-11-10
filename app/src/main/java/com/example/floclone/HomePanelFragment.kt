@@ -13,8 +13,6 @@ class HomePanelFragment(private val panelData: Panel) : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomePanelBinding.inflate(inflater, container, false)
 
-        print(panelData)
-
         binding.textTitle.setText(panelData.titleText)
         binding.imgBackgroundIv.setImageResource(panelData.backgroundImgRes)
         binding.imgAlbumEx1Iv.setImageResource(panelData.albumImg1)
@@ -24,7 +22,7 @@ class HomePanelFragment(private val panelData: Panel) : Fragment() {
         binding.textAlbumEx1Musician.setText(panelData.albumSinger1)
         binding.textAlbumEx2Musician.setText(panelData.albumSinger2)
         binding.textRecentDate.setText(panelData.updateDate)
-        binding.textMusicCount.setText("총 ${panelData.numOfMusic}곡")
+        binding.textMusicCount.setText("총 ${panelData.songNum}곡")
 
         return binding.root
     }
