@@ -71,6 +71,19 @@ class MainActivity : AppCompatActivity() {
 
         binding.mainPauseBtn.setOnClickListener { onPause() }
 
+        binding.mainPreviousBtn.setOnClickListener() {
+            miniPlayer.isPlaying = false
+            song.isPlaying = false
+            binding.mainMiniplayerBtn.visibility = View.VISIBLE
+            binding.mainPauseBtn.visibility = View.GONE
+            miniPlayer.interrupt()
+
+            binding.mainMiniplayerSb.progress = 0
+            song.playPos = 0
+            miniPlayer = MiniPlayer(song.length, song.isPlaying, song.playPos)
+            miniPlayer.start()
+        }
+
         initNavigation()
 
         binding.mainBnv.setOnItemSelectedListener {

@@ -27,9 +27,7 @@ class SongActivity : AppCompatActivity() {
 
         initSong()
 
-        binding.songDownIv.setOnClickListener {
-            finish()
-        }
+        binding.songDownIv.setOnClickListener { finish() }
 
         binding.btnPlayerPlay.setOnClickListener {
             player.isPlaying = true
@@ -41,6 +39,23 @@ class SongActivity : AppCompatActivity() {
 
         binding.btnPlayerPause.setOnClickListener { onPause() }
 
+        binding.btnPlayerPrevious.setOnClickListener() {
+            player.isPlaying = false
+            song.isPlaying = false
+            setPlayerStatus(false)   // 정지 상태일때의 이미지로 전환
+            player.interrupt()
+
+            binding.songPlayerSb.progress = 0   //Seekbar 초기화
+            binding.startTimeTv.text = "00:00"
+            song.playPos = 0
+            player = Player(song.length, song.isPlaying, song.playPos)
+            player.start()
+        }
+
+        binding.btnPlayerNext.setOnClickListener() {
+
+        }
+
         binding.btnPlayerRepeatNo.setOnClickListener { setRepeat(1) }
         binding.btnPlayerRepeat.setOnClickListener { setRepeat(2) }
         binding.btnPlayerRepeat1.setOnClickListener { setRepeat(3) }
@@ -48,6 +63,30 @@ class SongActivity : AppCompatActivity() {
 
         binding.btnPlayerRandomNo.setOnClickListener { setRandomPlay(true) }
         binding.btnPlayerRandom.setOnClickListener { setRandomPlay(false) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mediaPlayer?.pause()   // 미디어플레이어 중지
+        player.isPlaying = false // Thread 중지
+        song.second = (binding.songPlayerSb.progress * song.length) / 1000
+        song.playPos = mediaPlayer?.currentPosition!!
+        setPlayerStatus(false)   // 정지 상태일때의 이미지로 전환
+
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()   // sharedPreference 조작
+        //GSON : JSON 생성기
+        val json = gson.toJson(song)
+        editor.putString("song", json)
+
+        editor.apply()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        player.interrupt()
+        mediaPlayer?.release()   // 미디어 플레이어가 갖고 있던 리소스 해제 (song)
+        mediaPlayer = null       // 미디어 플레이어 해제
     }
 
     private fun initSong() {
@@ -171,29 +210,5 @@ class SongActivity : AppCompatActivity() {
             }
 
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        mediaPlayer?.pause()   // 미디어플레이어 중지
-        player.isPlaying = false // Thread 중지
-        song.second = (binding.songPlayerSb.progress * song.length) / 1000
-        song.playPos = mediaPlayer?.currentPosition!!
-        setPlayerStatus(false)   // 정지 상태일때의 이미지로 전환
-
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()   // sharedPreference 조작
-        //GSON : JSON 생성기
-        val json = gson.toJson(song)
-        editor.putString("song", json)
-
-        editor.apply()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        player.interrupt()
-        mediaPlayer?.release()   // 미디어 플레이어가 갖고 있던 리소스 해제 (song)
-        mediaPlayer = null       // 미디어 플레이어 해제
     }
 }
