@@ -1,5 +1,9 @@
 package com.example.floclone
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "SongTable")
 data class Song(
     val title : String = "",
     val singer : String = "",
@@ -12,4 +16,8 @@ data class Song(
     var second : Int = 0,
     var playPos : Int = 0,
     val isTitle : Boolean = false,
-)
+    var isLike : Boolean = false,
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id : Int = 0
+}

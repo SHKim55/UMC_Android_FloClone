@@ -1,17 +1,16 @@
 package com.example.floclone
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.floclone.databinding.ItemSavedSongBinding
-import com.example.floclone.databinding.ItemSongBinding
 
-class SavedSongRVAdapter(private val songList: ArrayList<Song>) : RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>() {
-    //클릭 인터페이스 정의
+class SavedSongRVAdapter() : RecyclerView.Adapter<SavedSongRVAdapter.ViewHolder>() {
+    private val songs = ArrayList<Song>()
     interface SavedSongItemClickListener {
 //        fun onItemClick(song : Song)
-        fun onMoreButtonClick(position: Int)
+        fun onMoreButtonClick(songId : Int)
     }
 
     // 리스너 객체 저장 변수
@@ -28,16 +27,25 @@ class SavedSongRVAdapter(private val songList: ArrayList<Song>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: SavedSongRVAdapter.ViewHolder, position: Int) {
-        holder.bind(songList[position])
+        holder.bind(songs[position])
 //        holder.itemView.setOnClickListener() { savedSongItemClickListener.onItemClick(songList[position]) }
 
-        holder.binding.savedSongListMoreIv.setOnClickListener() { savedSongItemClickListener.onMoreButtonClick(position) }
+        holder.binding.savedSongListMoreIv.setOnClickListener() {
+            savedSongItemClickListener.onMoreButtonClick(songs[position].id)
+            removeSong(position)
+        }
     }
 
-    override fun getItemCount(): Int = songList.size
+    override fun getItemCount(): Int = songs.size
 
-    fun removeItem(position : Int) {
-        songList.removeAt(position)
+    @SuppressLint("NotifyDataSetChanged")
+    fun addSongs(songs : ArrayList<Song>) {
+        this.songs.clear()
+        this.songs.addAll(songs)
+    }
+
+    fun removeSong(position : Int) {
+        songs.removeAt(position)
         notifyDataSetChanged()
     }
 
