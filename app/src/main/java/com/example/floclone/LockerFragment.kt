@@ -21,25 +21,13 @@ class LockerFragment : Fragment() {
     ): View {
         binding = FragmentLockerBinding.inflate(inflater, container, false)
 
-        createSavedSongList()
-
         val lockerAdapter = LockerViewpagerAdapter(this, songs)
         binding.lockerContentVp.adapter = lockerAdapter
 
-        TabLayoutMediator(binding.lockerContentTb, binding.lockerContentVp) {
-                tab, position ->
+        TabLayoutMediator(binding.lockerContentTb, binding.lockerContentVp) { tab, position ->
             tab.text = information[position]
         }.attach()
 
         return binding.root
-    }
-
-    private fun createSavedSongList() {
-        val songData = (context as MainActivity).albums
-
-        for(i in 0 until songData.size) {
-            for(j in 0 until songData[i].songs.size)
-                songs.add(songData[i].songs.get(j))
-        }
     }
 }
