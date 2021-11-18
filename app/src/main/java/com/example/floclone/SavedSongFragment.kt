@@ -34,9 +34,11 @@ class SavedSongFragment(private val songs : ArrayList<Song>) : Fragment() {
         savedSongRVAdapter.addSongs(songDB.SongDao().getLikedSongs(true) as ArrayList<Song>)
 
         savedSongRVAdapter.setSavedSongItemClickListener(object: SavedSongRVAdapter.SavedSongItemClickListener {
-            override fun onMoreButtonClick(songId : Int) { songDB.SongDao().updateIsLikeById(false, songId) }
+            override fun onMoreButtonClick(songId : Int) {
+                songDB.SongDao().updateIsLikeById(false, songId)
+                (context as MainActivity).song.isLike = false
+            }
         })
-
     }
 
 }

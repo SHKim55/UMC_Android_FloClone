@@ -13,8 +13,9 @@ import com.google.gson.Gson
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
-    private lateinit var albumDB : ArrayList<Album>
-    private var albumData =  ArrayList<Album>()
+    private lateinit var albumDB : AlbumDatabase
+    private lateinit var songDB : SongDatabase
+    private var albums = ArrayList<Album>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,16 +24,19 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        albumDB = (context as MainActivity).albums
-        //데이터 리스트 생성
-        albumData.apply {
-            for(i in 0 until albumDB.size) {
-                add(albumDB[i])
-            }
-        }
+        albumDB = AlbumDatabase.getInstance((context as MainActivity))!!
+        songDB = SongDatabase.getInstance((context as MainActivity))!!
+        albums.addAll(albumDB.AlbumDao().getAlbums())
 
+        initPanels()
+        initRV()
+
+        return binding.root
+    }
+
+    private fun initRV() {
         //더미데이터와 Adapter 연결
-        val albumRVAdapter = AlbumRVAdapter(albumData)
+        val albumRVAdapter = AlbumRVAdapter(albums, songDB)
         //Adapter - RV 연결
         binding.homeTodayMusicAlbumRecyclerview.adapter = albumRVAdapter
 
@@ -41,17 +45,19 @@ class HomeFragment : Fragment() {
                 changeAlbumFragment(album)
             }
 
-            override fun onPlayButtonClick(album : Album, index : Int) {
-                val nextSong = album.songs.get(0)
-                (context as MainActivity).albumIndex = index
-                (context as MainActivity).songIndex = 0
-                changePlayer(nextSong)
+            override fun onPlayButtonClick(albumIdx : Int) {
+                val nextSong = songDB.SongDao().getSongsInAlbum(albumIdx)
+
+                // 앨범 내의 곡 중 0번 index의 곡 실행
+                changePlayer(nextSong[0].id)
             }
         })
 
         //레이아웃 매니저 추가
         binding.homeTodayMusicAlbumRecyclerview.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    }
 
+    private fun initPanels() {
         // 홈 패널 구성
         val panel1 = Panel("빌보드를 휩쓸어버린 그 노래", R.drawable.img_background_4_x_1, R.drawable.img_album_butter, R.drawable.img_album_dynamite,
             "Butter", "Dynamite", "방탄소년단", "방탄소년단", "2021.09.10", 10)
@@ -62,7 +68,6 @@ class HomeFragment : Fragment() {
         val panelAdapter = HomePanelViewpagerAdapter(this)
         panelAdapter.addFragment(HomePanelFragment(panel1))
         panelAdapter.addFragment(HomePanelFragment(panel2))
-
         binding.homePanelVp.adapter = panelAdapter
         binding.homePanelVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
@@ -71,27 +76,24 @@ class HomeFragment : Fragment() {
         val bannerAdapter = BannerViewpagerAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
-
         binding.homeBannerVp.adapter = bannerAdapter
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
-        return binding.root
     }
 
     private fun changeAlbumFragment(album : Album) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, AlbumFragment().apply {
-                arguments = Bundle().apply {
-                    val gson = Gson()
-                    val albumJson = gson.toJson(album)
-                    putString("album", albumJson)
-                }
+                arguments = Bundle().apply { putInt("albumId", album.id) }
             })
             .commitAllowingStateLoss()
     }
 
-    private fun changePlayer(song : Song) {
-        (context as MainActivity).song = song
-        (context as MainActivity).setMiniPlayer(song)
+    private fun changePlayer(id : Int) {
+        val nextSong = songDB.SongDao().getSong(id)
+        nextSong.second = 0
+        songDB.SongDao().updateSecondById(0, nextSong.id)
+        (context as MainActivity).song = nextSong
+        (context as MainActivity).changeSong(0)
+        (context as MainActivity).setMiniPlayer(nextSong)
     }
 }

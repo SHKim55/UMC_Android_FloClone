@@ -1,6 +1,7 @@
 package com.example.floclone
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,11 +10,11 @@ import com.example.floclone.databinding.FragmentAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 
-class AlbumFragment () : Fragment () {
-
+class AlbumFragment : Fragment () {
     lateinit var binding: FragmentAlbumBinding
-    val information = arrayListOf("수록곡", "상세정보", "영상")
-    private var gson: Gson = Gson()
+    private lateinit var albumDB : AlbumDatabase
+    private lateinit var songDB : SongDatabase
+    private val information = arrayListOf("수록곡", "상세정보", "영상")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,9 +24,18 @@ class AlbumFragment () : Fragment () {
 
         binding = FragmentAlbumBinding.inflate(inflater, container, false)
 
-        //JSON Object 받아오기
-        val albumData = arguments?.getString("album")
-        val album = gson.fromJson(albumData, Album::class.java)
+        albumDB = AlbumDatabase.getInstance(context as MainActivity)!!
+        songDB = SongDatabase.getInstance(context as MainActivity)!!
+
+        initAlbum()
+
+        return binding.root
+    }
+
+    private fun initAlbum() {
+        val albumId = requireArguments().getInt("albumId")
+        Log.d("albumId", albumId.toString())
+        val album = albumDB.AlbumDao().getAlbum(albumId)
 
         var scaleText = ""
         when(album.albumScale) {
@@ -45,7 +55,7 @@ class AlbumFragment () : Fragment () {
                 .commitAllowingStateLoss()
         }
 
-        val albumAdapter = AlbumViewpagerAdapter(this, album.songs)
+        val albumAdapter = AlbumViewpagerAdapter(this, songDB.SongDao().getSongsInAlbum(albumId) as ArrayList<Song>)
         binding.albumContentVp.adapter = albumAdapter
 
         TabLayoutMediator(binding.albumContentTb, binding.albumContentVp) {
@@ -53,6 +63,5 @@ class AlbumFragment () : Fragment () {
             tab.text = information[position]
         }.attach()
 
-        return binding.root
     }
 }
