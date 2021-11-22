@@ -8,9 +8,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 import androidx.room.migration.Migration
 
-@Database(entities = [Song::class, User::class], version = 2)   //AlbumDB와 동기화를 위해 Schema 수정
+@Database(entities = [Song::class, Album::class, User::class, Like::class], version = 2)   //User Login 동기화를 위해 Schema 수정
 abstract class SongDatabase : RoomDatabase() {
     abstract fun SongDao() : SongDao
+    abstract fun AlbumDao() : AlbumDao
     abstract fun UserDao() : UserDao
 
     companion object {

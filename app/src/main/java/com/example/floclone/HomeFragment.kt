@@ -13,7 +13,6 @@ import com.google.gson.Gson
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
-    private lateinit var albumDB : AlbumDatabase
     private lateinit var songDB : SongDatabase
     private var albums = ArrayList<Album>()
 
@@ -24,9 +23,8 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        albumDB = AlbumDatabase.getInstance((context as MainActivity))!!
         songDB = SongDatabase.getInstance((context as MainActivity))!!
-        albums.addAll(albumDB.AlbumDao().getAlbums())
+        albums.addAll(songDB.AlbumDao().getAlbums())
 
         initPanels()
         initRV()

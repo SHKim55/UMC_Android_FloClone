@@ -136,32 +136,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun inputDummyAlbums() {
-        val albumDB = AlbumDatabase.getInstance(this)!!
-        val albums = albumDB.AlbumDao().getAlbums()
+        val songDB = SongDatabase.getInstance(this)!!
+        val albums = songDB.AlbumDao().getAlbums()
 
         if(albums.isNotEmpty()) return
 
-        albumDB.AlbumDao().insert(
+        songDB.AlbumDao().insert(
             Album("IU 5th Album 'LILAC'", "아이유(IU)", "2021.03.25", "가요 / 댄스", R.drawable.img_album_lilac, 0, 1)
         )
 
-        albumDB.AlbumDao().insert(
+        songDB.AlbumDao().insert(
             Album("항해", "AKMU(악뮤)", "2019.09.25", "가요 / 락", R.drawable.img_album_sailing, 0, 2)
         )
 
-        albumDB.AlbumDao().insert(
+        songDB.AlbumDao().insert(
             Album("DYNAMITE (DayTime Ver.)", "방탄소년단", "2020.08.21", "가요 / 댄스", R.drawable.img_album_dynamite, 2, 3)
         )
 
-        albumDB.AlbumDao().insert(
+        songDB.AlbumDao().insert(
             Album("Butter", "방탄소년단", "2021.05.21", "가요 / 댄스", R.drawable.img_album_butter, 2, 4)
         )
 
-        albumDB.AlbumDao().insert(
+        songDB.AlbumDao().insert(
             Album("strawberry moon", "아이유(IU)", "2021.10.19", "가요 / 락", R.drawable.img_album_strawberry, 2, 5)
         )
 
-        albumDB.AlbumDao().insert(
+        songDB.AlbumDao().insert(
             Album("신호등", "이무진", "2021.05.14", "가요 / 락", R.drawable.img_album_traffic_light, 2, 6)
         )
     }
